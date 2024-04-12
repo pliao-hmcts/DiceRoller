@@ -6,7 +6,6 @@ public class DiceRoll {
     // Static method to roll a die with a specified number of sides
     public static int roll(int sides) throws Exception {
         // Initialize array for checking valid dice options
-        int[] validDice = {2,3,4,6,8,10,12,20,100};
         Exception e = new Exception("Invalid Dice");
 
         //Check sides is listed as a valid dice
