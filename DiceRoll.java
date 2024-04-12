@@ -1,36 +1,23 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class DiceRoll {
-    private static final Random random = new Random();
 
-    // Existing roll method
-    public static int roll(int sides) {
-        return random.nextInt(sides) + 1;
+    // Static method to roll a die with a specified number of sides
+    public static int roll(int sides) throws Exception {
+        // Initialize array for checking valid dice options
+        int[] validDice = {2,3,4,6,8,10,12,20,100};
+        Exception e = new Exception("Invalid Dice");
+
+        //Check sides is listed as a valid dice
+        if (!Arrays.asList(validDice).contains(sides)) {
+            //Invalid dice
+            throw e;
+        } else {
+            Random random = new Random();
+            //Randomize dice roll (sides is maximum bound, 1 is minimum)
+            return random.nextInt(sides - 1) + 1;
+        }
     }
 
-    // Method to perform multiple dice rolls based on the input string
-    public static int multiRoll(String dice) {
-        // Validate the input format
-        if(dice.startsWith("d")) {
-            dice = "1" + dice;
-        }
-        if (!dice.matches("\\d+d\\d+")) {
-            throw new IllegalArgumentException("Invalid dice format: " + dice);
-        }
-
-        // Split the input string into the number of dice and the number of sides
-        String[] parts = dice.split("d");
-        int numDice = Integer.parseInt(parts[0]);
-        int sides = Integer.parseInt(parts[1]);
-
-        // Perform the dice rolls and sum the results
-        int total = 0;
-        for (int i = 0; i < numDice; i++) {
-            int rollResult = roll(sides);
-            System.out.println("Roll: " + rollResult);
-            total += rollResult;
-        }
-
-        return total;
-    }
 }
